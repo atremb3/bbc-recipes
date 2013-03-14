@@ -1,0 +1,16 @@
+
+# Recipes
+
+recipes:
+
+    - !!models.Recipe
+        category:   poultry & game
+        name:       Cajun turkey steaks with pineapple salsa
+        issue:      February 2010
+        page:       23
+        
+    - !!models.Recipe
+        category:   side dishes
+        name:       cauliflower mash
+        issue:      February 2010
+        page:       32     
