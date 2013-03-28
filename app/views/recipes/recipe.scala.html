@@ -1,4 +1,7 @@
-@(recipes: List[Recipe])
+@(recipes: List[Recipe], recipeForm: Form[Recipe])
+
+
+
 
 @main("Recipe Finder Application") {
 
@@ -12,28 +15,60 @@
     </p>
 }
 
+<button id="add-recipe">Add a new Recipe</button>
 
 <h1>@recipes.size() Recipes available:</h1>
 	
-		<ul>
-		@for(recipe <- recipes) {
+	@if(recipes.size() > 0) {
 		
-	  		<li>@recipe.category <b>@recipe.name</b> @recipe.issue @recipe.page @recipe.comment</li>
-	  	
-	  	}
-	</ul>
+		<table class="jtable">
+	        <thead>
+	        <th>Category</th>
+	        <th width="30%">Name</th>
+	        <th>Issue</th>
+	        <th>Page</th>
+	        <th width="30%">Comment</th>
+	        <th>Rating</th>
+	        </thead>
+	        <tbody>
+	            @for(recipe <- recipes) {
+	            <tr id='@recipe.id'>
+	                <td>@recipe.category</a></td>
+	                <td>@recipe.name</td>
+	                <td>@recipe.issue</td>
+	                <td>@recipe.page</td>
+	                <td>@recipe.comment</td>
+	                <td>@recipe.nbStars</td>
+	            </tr>
+	            }
+	        </tbody>
+	    </table>
 	
-	
-	 		
- 		@helper.form(action = routes.Application.upload, 'enctype -> "multipart/form-data") {
+	}
+
+ 	@helper.form(action = routes.Application.upload, 'enctype -> "multipart/form-data") {
  		
-	<h2>Upload  your recipes</h2>
-    
-    <input type="file" name="recipes">
-    
-    <p>
-        <input type="submit">
-    </p>
+		<h2>Upload  your recipes</h2>
+	    
+	    <input type="file" name="recipes">
+	    
+	    <p>
+	        <input type="submit">
+	    </p>
 	}
 	
+	<div id="recipe-dialog-form" title="Add a new recipe">
+		@helper.form(action = routes.Application.addRecipe()) {
+			@helper.inputText(recipeForm("category"), 'class -> "label")
+			@helper.inputText(recipeForm("name"), 'class -> "label")
+			@helper.inputText(recipeForm("issue"))
+			@helper.inputText(recipeForm("page"))
+			@helper.inputText(recipeForm("comment"))
+			@helper.inputText(recipeForm("nbStars"))
+		}
+	</div>
+
+</html>
+	
 }
+

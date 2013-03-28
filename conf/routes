@@ -4,9 +4,11 @@
 
 # Home page
 #GET     /  
+GET     /javascriptRoutes     		controllers.Application.javascriptRoutes
 GET		/recipes                    controllers.Application.recipes()
+POST	/recipe/add                 controllers.Application.addRecipe()
 POST	/recipes/upload				controllers.Application.upload()
-
+POST	/recipes/update/:id			controllers.Application.updateRecipe(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

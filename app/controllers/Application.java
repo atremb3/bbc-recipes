@@ -1,18 +1,19 @@
 package controllers;
 
+import static play.data.Form.form;
+
 import java.io.File;
 import java.util.List;
 
 import models.Recipe;
+import play.Routes;
+import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
-import views.html.recipes.recipe;
 import csv.loaders.RecipeData;
 import csv.loaders.RecipeFileReader;
-
-
 public class Application extends Controller {
 	
     public static Result index() {
@@ -21,7 +22,8 @@ public class Application extends Controller {
     
     public static Result recipes() {
     	List<Recipe> recipes = Recipe.all();
-    	return ok(recipe.render(recipes));
+    	Form<Recipe> addRecipeForm = form(Recipe.class).bindFromRequest();
+    	return ok(views.html.recipes.recipe.render(recipes, addRecipeForm));
     }
     
     public static Result upload() {
@@ -50,14 +52,12 @@ public class Application extends Controller {
    	    RecipeFileReader recipeReader = new RecipeFileReader(recipeFile);
 	    recipeReader.open();
 	    
-	    RecipeData recipeData = recipeReader.read();
-	    
+	    RecipeData recipeData = recipeReader.read();    
 	    Recipe recipe = null;
 	    
 	    try {
-		    while (recipeData != null) {
-		    
-		    	recipe = mapToRecipe(recipeData);					
+		    while (recipeData != null) {	    
+		    	recipe = Recipe.map(recipeData);					
 				recipe.save();					
 				recipeData = recipeReader.read();
 		    }
@@ -66,19 +66,36 @@ public class Application extends Controller {
 	    	throw e;
 	    } finally {
 	    	recipeReader.close();
-	    }
-		
+	    }		
 	}
 
-	private static Recipe mapToRecipe(RecipeData recipeData) {
-		Recipe recipe = new Recipe();
+	public static Result updateRecipe(Long id) {
 		
-		recipe.category = recipeData.category;
-		recipe.name = recipeData.name;
-		recipe.issue = recipeData.issue;
-		recipe.page = recipeData.page;
-		recipe.comment = recipeData.comment;
-		recipe.nbStars = recipeData.nbStars;
-		return recipe;
+		return ok();
 	}
+	
+	public static Result addRecipe() {
+		
+		Form<Recipe> addRecipeForm = form(Recipe.class).bindFromRequest();
+		Recipe newRecipe = addRecipeForm.get();
+		Recipe.add(newRecipe);
+		return redirect(routes.Application.recipes());
+	}
+
+	public static Result updateRecipeCategory(Long id) {
+		
+		return ok();
+	}
+
+
+	public static Result javascriptRoutes() {
+	    response().setContentType("text/javascript");
+	    return ok(
+	        Routes.javascriptRouter("myJsRoutes",
+	        	routes.javascript.Application.addRecipe()
+	        )
+	    );
+	}
+
 }
+

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import csv.loaders.RecipeData;
+
 import play.db.ebean.Model;
 
 @Entity 
@@ -27,5 +29,20 @@ public class Recipe extends Model {
 	
 	public static List<Recipe> all()  {
 		return find.all();
+	}
+	
+	public static void add(Recipe recipe) {
+		recipe.save();
+	}
+	
+	public static Recipe map(RecipeData recipeData) {
+		Recipe recipe = new Recipe();
+		recipe.category = recipeData.category;
+		recipe.name = recipeData.name;
+		recipe.issue = recipeData.issue;
+		recipe.page = recipeData.page;
+		recipe.comment = recipeData.comment;
+		recipe.nbStars = recipeData.nbStars;
+		return recipe;
 	}
 }
