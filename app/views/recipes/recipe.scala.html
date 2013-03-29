@@ -1,8 +1,5 @@
 @(recipes: List[Recipe], recipeForm: Form[Recipe])
 
-
-
-
 @main("Recipe Finder Application") {
 
 @if(flash.contains("success")) {
@@ -16,6 +13,7 @@
 }
 
 <button id="add-recipe">Add a new Recipe</button>
+<button id="find-recipes">Find Recipes</button>
 
 <h1>@recipes.size() Recipes available:</h1>
 	
@@ -57,7 +55,7 @@
 	    </p>
 	}
 	
-	<div id="recipe-dialog-form" title="Add a new recipe">
+	<div id="addrecipe-dialog-form" title="Add a new recipe">
 		@helper.form(action = routes.Application.addRecipe()) {
 			@helper.inputText(recipeForm("category"), 'class -> "label")
 			@helper.inputText(recipeForm("name"), 'class -> "label")
