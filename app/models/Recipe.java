@@ -5,9 +5,12 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import csv.loaders.RecipeData;
-
 import play.db.ebean.Model;
+
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.ExpressionList;
+
+import csv.loaders.RecipeData;
 
 @Entity 
 public class Recipe extends Model {
@@ -15,6 +18,7 @@ public class Recipe extends Model {
 	@Id
 	public Long id;
 	public String name;
+	public String displayName;
 	public String category;
 	public int page;
 	public String issue;
@@ -38,11 +42,19 @@ public class Recipe extends Model {
 	public static Recipe map(RecipeData recipeData) {
 		Recipe recipe = new Recipe();
 		recipe.category = recipeData.category;
-		recipe.name = recipeData.name;
+		recipe.name = recipeData.name.toLowerCase();
+		recipe.displayName = recipeData.name;
 		recipe.issue = recipeData.issue;
 		recipe.page = recipeData.page;
 		recipe.comment = recipeData.comment;
 		recipe.nbStars = recipeData.nbStars;
 		return recipe;
+	}
+
+	public static List<Recipe> find(Recipe templateRecipe) {
+		ExpressionList<Recipe> findRecipeExp = Ebean.find(Recipe.class).where().exampleLike(templateRecipe);  	    	    
+		List<Recipe> result = findRecipeExp.findList();
+		return result;
+		
 	}
 }

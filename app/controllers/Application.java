@@ -6,8 +6,13 @@ import java.io.File;
 import java.util.List;
 
 import models.Recipe;
+
+import org.codehaus.jackson.JsonNode;
+
 import play.Routes;
 import play.data.Form;
+import play.libs.Json;
+import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
@@ -81,6 +86,28 @@ public class Application extends Controller {
 		Recipe.add(newRecipe);
 		return redirect(routes.Application.recipes());
 	}
+	
+	@BodyParser.Of(BodyParser.Json.class)
+	public static Result findRecipes() {
+		
+		JsonNode json = request().body().asJson();
+		  
+		Recipe templateRecipe = null;
+		if (json == null) {
+		    return badRequest("Expecting Json data");
+		  } else {
+			  templateRecipe = new Recipe();
+			  String recipeName = json.findPath("name").getTextValue();
+			  if (recipeName != null) {
+				  templateRecipe.name = '%' + recipeName.toLowerCase() + '%';  
+			  }
+			  templateRecipe.category = json.findPath("category").getTextValue();			  
+		  }
+		
+		List<Recipe> recipes = Recipe.find(templateRecipe);
+			    
+		return ok(Json.toJson(recipes));
+	}
 
 	public static Result updateRecipeCategory(Long id) {
 		
@@ -92,10 +119,10 @@ public class Application extends Controller {
 	    response().setContentType("text/javascript");
 	    return ok(
 	        Routes.javascriptRouter("myJsRoutes",
-	        	routes.javascript.Application.addRecipe()
+	        	routes.javascript.Application.addRecipe(),
+	        	routes.javascript.Application.findRecipes()
 	        )
 	    );
 	}
 
 }
-

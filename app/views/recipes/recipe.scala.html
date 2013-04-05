@@ -32,7 +32,7 @@
 	            @for(recipe <- recipes) {
 	            <tr id='@recipe.id'>
 	                <td>@recipe.category</a></td>
-	                <td>@recipe.name</td>
+	                <td>@recipe.displayName</td>
 	                <td>@recipe.issue</td>
 	                <td>@recipe.page</td>
 	                <td>@recipe.comment</td>
@@ -66,6 +66,18 @@
 		}
 	</div>
 
+	<div id="findrecipes-dialog-form" title="find recipes">
+	Search by Category or Name:
+		@helper.form(action = routes.Application.findRecipes()) {
+			@helper.inputText(recipeForm("category"), 'class -> "label")
+			@helper.inputText(recipeForm("name"), 'class -> "label")
+
+		}
+	</div>
+
+	<div id="search-result-dialog" title="Results ">
+	</div>
+	
 </html>
 	
 }

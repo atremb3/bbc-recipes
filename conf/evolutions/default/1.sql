@@ -6,6 +6,7 @@
 create table recipe (
   id                        bigint not null,
   name                      varchar(255),
+  display_name              varchar(255),
   category                  varchar(255),
   page                      integer,
   issue                     varchar(255),

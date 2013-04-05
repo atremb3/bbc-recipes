@@ -1,6 +1,6 @@
 $().ready(function(){ 
 	
-	$('#recipe-dialog-form').dialog({
+	$('#addrecipe-dialog-form').dialog({
 	      autoOpen: false,
 	      height: 600,
 	      width: 500,
@@ -32,7 +32,7 @@ $().ready(function(){
 	
 	$('#add-recipe').click(		
 		function() {
-			$( "#recipe-dialog-form" ).dialog( "open" );
+			$( "#addrecipe-dialog-form" ).dialog( "open" );
 		}
 	);
 });		
