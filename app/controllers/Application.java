@@ -31,20 +31,18 @@ public class Application extends Controller {
     	return ok(views.html.recipes.recipe.render(recipes, addRecipeForm));
     }
     
+    
     public static Result upload() {
     	  MultipartFormData body = request().body().asMultipartFormData();
     	  FilePart recipeFile = body.getFile("recipes");
     	  if (recipeFile != null) {
-    	    File file = recipeFile.getFile();
-    	    
-    	    //do my stuff   
+    	    File file = recipeFile.getFile(); 
     	    try {
     	    	processRecipeFile(file);
     	    	flash("success", "Recipe file uploaded successfully");
     	    } catch (Exception e) {
     	    	flash("error", "Error encountered while processing file");
     	    }
-    	    
     	  } else {
     	    flash("error", "Missing file");   
     	  }
@@ -79,6 +77,11 @@ public class Application extends Controller {
 		return ok();
 	}
 	
+//	public static Result rate(Long id) {
+//		Recipe recipe = Recipe.findById(id);
+//		return ok(String.valueOf(recipe.nbStars));
+//	}
+	
 	public static Result addRecipe() {
 		
 		Form<Recipe> addRecipeForm = form(Recipe.class).bindFromRequest();
@@ -109,18 +112,13 @@ public class Application extends Controller {
 		return ok(Json.toJson(recipes));
 	}
 
-	public static Result updateRecipeCategory(Long id) {
-		
-		return ok();
-	}
-
-
 	public static Result javascriptRoutes() {
 	    response().setContentType("text/javascript");
 	    return ok(
 	        Routes.javascriptRouter("myJsRoutes",
 	        	routes.javascript.Application.addRecipe(),
 	        	routes.javascript.Application.findRecipes()
+	        	//routes.javascript.Application.rate()
 	        )
 	    );
 	}

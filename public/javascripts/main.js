@@ -66,6 +66,6 @@ jQuery(function($){//on document ready
     //enableRowSelection();
     //enableColumnSorting();
     //enableShortcuts();
-    //enableCheckboxSubmission();
+    //enableCheckboxSubmission(); 	
 	applyTableStyling();
 });

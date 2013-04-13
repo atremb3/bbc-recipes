@@ -8,6 +8,7 @@ GET     /javascriptRoutes     		controllers.Application.javascriptRoutes
 GET		/recipes                    controllers.Application.recipes()
 POST	/recipes/find			    controllers.Application.findRecipes()
 POST	/recipe/add                 controllers.Application.addRecipe()
+#GET		/recipes/recipe/:id/rate	controllers.Application.rate(id: Long)
 POST	/recipes/upload				controllers.Application.upload()
 POST	/recipes/update/:id			controllers.Application.updateRecipe(id: Long)
 

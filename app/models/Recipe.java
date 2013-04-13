@@ -55,6 +55,10 @@ public class Recipe extends Model {
 		ExpressionList<Recipe> findRecipeExp = Ebean.find(Recipe.class).where().exampleLike(templateRecipe);  	    	    
 		List<Recipe> result = findRecipeExp.findList();
 		return result;
-		
+	}
+	
+	public static Recipe findById(Long id) {
+		Recipe recipe = (Recipe) find.byId(id);
+		return recipe;
 	}
 }
