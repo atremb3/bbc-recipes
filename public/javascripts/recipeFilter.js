@@ -25,11 +25,12 @@ $().ready(function(){
 	    				+ recipes[i].issue + "</td><td>" 
 	    				+ recipes[i].page + "</td><td>"
 	    				+ recipes[i].comment + "</td><td>"
-	    				+ recipes[i].nbStars +"</td></tr>"; 
+	    				+ "<div class='rateit' data-rateit-value='" + recipes[i].nbStars + "' data-rateit-readonly='true'></div>";
 				}
 				// replace html on page
 				$('table').find('tbody').html(recipesHtml);
 				applyTableStyling();
+				$('div.rateit').rateit();
 			},
 			error : function(jqXHR, textStatus, errorThrown ) { console.log(errorThrown); }
 		} );

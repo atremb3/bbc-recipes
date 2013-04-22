@@ -21,6 +21,10 @@ function applyFormStyling(element) {
     
 }
 
+function applyRating() {
+	$('div.rateit').rateit();
+}
+
 function applyTableEvents() {
 	$(".jtable").delegate("tr", "mouseenter mouseleave", function(event) {
 		if (event.type == 'mouseenter') {
