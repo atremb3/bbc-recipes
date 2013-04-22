@@ -21,30 +21,29 @@ function applyFormStyling(element) {
     
 }
 
+function applyTableEvents() {
+	$(".jtable").delegate("tr", "mouseenter mouseleave", function(event) {
+		if (event.type == 'mouseenter') {
+			$(this).children("td").addClass("ui-state-hover");
+	    } else {
+	    	$(this).children("td").removeClass("ui-state-hover");
+	    }
+	});
+}
+
 function applyTableStyling() {
-	 $(".jtable th").each(function(){
-		 
-		  $(this).addClass("ui-state-default");
-		 
-		  });
-		 $(".jtable td").each(function(){
-		 
-		  $(this).addClass("ui-widget-content");
-		 
-		  });
-		 $(".jtable tr").hover(
-		     function()
-		     {
-		      $(this).children("td").addClass("ui-state-hover");
-		     },
-		     function()
-		     {
-		      $(this).children("td").removeClass("ui-state-hover");
-		     }
-		    );
+	
+	$(".jtable th").each(function() {
+		$(this).addClass("ui-state-default");
+	});
+	
+	$(".jtable td").each(function() {
+		$(this).addClass("ui-widget-content");
+	});
+	
 		// $(".jtable tr").click(function(){
 //		   
-//		   //$(this).children("td").toggleClass("ui-state-highlight");
+// //$(this).children("td").toggleClass("ui-state-highlight");
 //		 // make line editable
 //		 
 //		 var idToUpdate = $(this).attr('id');
@@ -66,6 +65,7 @@ jQuery(function($){//on document ready
     //enableRowSelection();
     //enableColumnSorting();
     //enableShortcuts();
-    //enableCheckboxSubmission(); 	
+    //enableCheckboxSubmission();
+	applyTableEvents();
 	applyTableStyling();
 });
