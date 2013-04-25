@@ -28,7 +28,12 @@ public class Application extends Controller {
     public static Result recipes() {
     	List<Recipe> recipes = Recipe.all();
     	Form<Recipe> addRecipeForm = form(Recipe.class).bindFromRequest();
-    	return ok(views.html.recipes.recipe.render(recipes, addRecipeForm));
+    	return ok(views.html.recipes.recipes.render(recipes, addRecipeForm));
+    }
+    
+    public static Result recipe(Long id) {
+    	Recipe recipe = Recipe.findById(id);
+    	return ok(views.html.recipes.recipe.render(recipe));
     }
     
     
@@ -71,10 +76,18 @@ public class Application extends Controller {
 	    	recipeReader.close();
 	    }		
 	}
+	
+	public static Result editRecipe(Long id) {
+		Recipe recipe = Recipe.findById(id);
+    	Form<Recipe> editRecipeForm = form(Recipe.class).fill(recipe);
+    	return ok(views.html.recipes.edit.render(id, editRecipeForm));
+	}
 
 	public static Result updateRecipe(Long id) {
-		
-		return ok();
+		Form<Recipe> updateRecipeForm = form(Recipe.class).bindFromRequest();
+		Recipe recipe = updateRecipeForm.get();
+		recipe.update(id);
+		return redirect(routes.Application.recipe(id));
 	}
 	
 //	public static Result rate(Long id) {
@@ -117,7 +130,8 @@ public class Application extends Controller {
 	    return ok(
 	        Routes.javascriptRouter("myJsRoutes",
 	        	routes.javascript.Application.addRecipe(),
-	        	routes.javascript.Application.findRecipes()
+	        	routes.javascript.Application.findRecipes(),
+	        	routes.javascript.Application.recipe()
 	        	//routes.javascript.Application.rate()
 	        )
 	    );

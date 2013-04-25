@@ -1,0 +1,27 @@
+@(recipeId:Long, recipeForm: Form[Recipe])
+
+@main("Recipe Finder Application") {
+
+<h1>Edit Recipe:</h1>
+	
+	@helper.form(action = routes.Application.updateRecipe(recipeId), 'id -> "edit-form") {
+		@helper.inputText(recipeForm("category"), 'class -> "label")
+		@helper.inputText(recipeForm("displayName"), 'class -> "label")
+		@helper.inputText(recipeForm("issue"))
+		@helper.inputText(recipeForm("page"))
+		@helper.inputText(recipeForm("comment"))
+<!-- 		@helper.inputText(recipeForm("nbStars")) -->
+		@helper.input(recipeForm("nbStars"), 'id -> "edit-form-nbStars", 'label -> None) { (id, name, value, args) =>
+    		<input type="hidden" name="@name" value="@value" id="@id">
+		} 
+		<div class="rateit" data-rateit-value='@recipeForm("nbStars")' id="rateit"></div>
+		<p>
+		<input type="submit" value="Save" class="button"/>
+		<a href="@routes.Application.recipes()" class="button">Back</a>
+	}
+	
+	
+</html>
+	
+}
+

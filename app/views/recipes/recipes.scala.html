@@ -1,0 +1,86 @@
+@(recipes: List[Recipe], recipeForm: Form[Recipe])
+
+@main("Recipe Finder Application") {
+
+@if(flash.contains("success")) {
+	<p class="success">
+    	@flash.get("success")
+    </p>
+} else  {
+	<p class="error">
+    	@flash.get("error")
+    </p>
+}
+
+<button id="add-recipe">Add a new Recipe</button>
+<button id="find-recipes">Find Recipes</button>
+<button id="clear-filter">Clear Filter</button>
+
+<h1>@recipes.size() Recipes available:</h1>
+	
+	@if(recipes.size() > 0) {
+		
+		<table class="jtable">
+	        <thead>
+	        <th>Category</th>
+	        <th width="30%">Name</th>
+	        <th>Issue</th>
+	        <th>Page</th>
+	        <th width="30%">Comment</th>
+	        <th>Rating</th>
+	        </thead>
+	        <tbody>
+	            @for(recipe <- recipes) {
+	            <tr id="@recipe.id">
+	                <td>@recipe.category</a></td>
+	                <td><a href="@routes.Application.recipe(recipe.id)">@recipe.displayName</a></td>
+	                <td>@recipe.issue</td>
+	                <td>@recipe.page</td>
+	                <td>@recipe.comment</td>
+	                <!-- <td>@recipe.nbStars</td> -->
+	                <td><div class="rateit" data-rateit-value="@recipe.nbStars" data-rateit-readonly="true"></div></td>
+	                
+	            </tr>
+	            }
+	        </tbody>
+	    </table>
+	
+	}
+
+ 	@helper.form(action = routes.Application.upload, 'enctype -> "multipart/form-data") {
+ 		
+		<h2>Upload  your recipes</h2>
+	    
+	    <input type="file" name="recipes">
+	    
+	    <p>
+	        <input type="submit">
+	    </p>
+	}
+	
+	<div id="addrecipe-dialog-form" title="Add a new recipe">
+		@helper.form(action = routes.Application.addRecipe()) {
+			@helper.inputText(recipeForm("category"), 'class -> "label")
+			@helper.inputText(recipeForm("name"), 'class -> "label")
+			@helper.inputText(recipeForm("issue"))
+			@helper.inputText(recipeForm("page"))
+			@helper.inputText(recipeForm("comment"))
+			@helper.inputText(recipeForm("nbStars"))
+		}
+	</div>
+
+	<div id="findrecipes-dialog-form" title="find recipes">
+	Search by Category or Name:
+		@helper.form(action = routes.Application.findRecipes()) {
+			@helper.inputText(recipeForm("category"), 'class -> "label")
+			@helper.inputText(recipeForm("name"), 'class -> "label")
+
+		}
+	</div>
+	
+
+	
+</html>
+	
+}
+

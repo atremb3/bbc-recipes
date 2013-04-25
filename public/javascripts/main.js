@@ -7,22 +7,33 @@ function applyFormStyling(element) {
 //    element.find('div.options a, div.search a, div.links a, td.actions a, input:submit, a.cancel').button();
 //    element.find('div.links a.disabled').button('disable');
  
+    element.find('a.button, input[type=submit], button').button();
+    
     // Dialog links
 //    element.find('a.dialog').click(function() {
 //        var link = $(this);
 //        showRemoteDialog(link.data('url'), link.data('title')); 
 //    });
     
-    $( "input[type=submit], a, button" )
-    .button()
-    .click(function( event ) {
-      event.preventDefault();
-    });
+//    $( "input[type=submit], a, button" )
+//    .button()
+//    .click(function( event ) {
+//      event.preventDefault();
+//    });
     
 }
 
 function applyRating() {
 	$('div.rateit').rateit();
+}
+
+function displayRecipe(id) {
+	 myJsRoutes.controllers.Application.recipe(id).ajax({
+		    success : function(data) { 
+	    	console.log("success");
+	    }
+	 });
+	
 }
 
 function applyTableEvents() {
@@ -33,6 +44,10 @@ function applyTableEvents() {
 	    	$(this).children("td").removeClass("ui-state-hover");
 	    }
 	});
+//	$(".jtable").delegate("td", "click", function(event) {
+//	    displayRecipe($(this).attr('id'));
+//	});
+	
 }
 
 function applyTableStyling() {
@@ -65,7 +80,7 @@ function applyTableStyling() {
 
 jQuery(function($){//on document ready
     //configureWidgets();
-    //applyFormStyling();
+    applyFormStyling();
     //enableRowSelection();
     //enableColumnSorting();
     //enableShortcuts();
