@@ -7,7 +7,7 @@ function applyFormStyling(element) {
 //    element.find('div.options a, div.search a, div.links a, td.actions a, input:submit, a.cancel').button();
 //    element.find('div.links a.disabled').button('disable');
  
-    element.find('a.button, input[type=submit], button').button();
+    element.find('a.button, input[type=submit], input[type=file], button').button();
     
     // Dialog links
 //    element.find('a.dialog').click(function() {
