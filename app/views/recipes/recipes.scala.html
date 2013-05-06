@@ -12,26 +12,27 @@
     </p>
 }
 
+	
 <button id="add-recipe">Add a new Recipe</button>
 <button id="find-recipes">Find Recipes</button>
 <button id="clear-filter">Clear Filter</button>
 
-<h1>@recipes.size() Recipes available:</h1>
+<h1>@recipes.size() Recipes Available:</h1>
 	
 	@if(recipes.size() > 0) {
 		
 		<table class="jtable">
 	        <thead>
-	        <th>Category</th>
-	        <th width="30%">Name</th>
-	        <th>Issue</th>
-	        <th>Page</th>
-	        <th width="30%">Comment</th>
-	        <th>Rating</th>
+		        <th>Category</th>
+		        <th width="30%">Name</th>
+		        <th>Issue</th>
+		        <th>Page</th>
+		        <th width="30%">Comment</th>
+		        <th>Rating</th>
 	        </thead>
 	        <tbody>
 	            @for(recipe <- recipes) {
-	            <tr id="@recipe.id">
+	            <tr id="@recipe.id" class="rowselect">
 	                <td>@recipe.category</a></td>
 	                <td><a href="@routes.Application.recipe(recipe.id)">@recipe.displayName</a></td>
 	                <td>@recipe.issue</td>
@@ -58,6 +59,8 @@
 	    </p>
 	}
 	
+	</div>
+	
 	<div id="addrecipe-dialog-form" title="Add a new recipe">
 		@helper.form(action = routes.Application.addRecipe()) {
 			@helper.inputText(recipeForm("category"), 'class -> "label")
@@ -78,6 +81,7 @@
 		}
 	</div>
 	
+
 
 	
 </html>

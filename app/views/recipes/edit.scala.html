@@ -2,6 +2,7 @@
 
 @main("Recipe Finder Application") {
 
+
 <h1>Edit Recipe:</h1>
 	
 	@helper.form(action = routes.Application.updateRecipe(recipeId), 'id -> "edit-form") {
@@ -19,7 +20,6 @@
 		<input type="submit" value="Save" class="button"/>
 		<a href="@routes.Application.recipes()" class="button">Back</a>
 	}
-	
 	
 </html>
 	

@@ -45,3 +45,16 @@ body {
     width: 200px;
     display: inline-block;
 }
+
+a {
+    color: #009ede;
+    text-decoration: none;
+}
+a:hover, a:active {
+    text-decoration: underline;
+    color: #009a3d;
+}
+
+table th {
+    font-weight: bold;
+}
