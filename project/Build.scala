@@ -13,7 +13,8 @@ object ApplicationBuild extends Build {
     javaJdbc,
     javaEbean,
     "org.springframework.batch" % "spring-batch-core" % "2.1.9.RELEASE",
-    "org.springframework.batch" % "spring-batch-infrastructure" % "2.1.9.RELEASE"
+    "org.springframework.batch" % "spring-batch-infrastructure" % "2.1.9.RELEASE",
+    "postgresql" % "postgresql" % "9.1-903-1.jdbc4"
   )
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
