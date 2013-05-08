@@ -17,7 +17,7 @@ object ApplicationBuild extends Build {
     "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
   )
 
-  val main = play.Project(appName, appVersion, appDependencies, mainLang = JAVA).settings(
+  val main = play.Project(appName, appVersion, appDependencies).settings(
     // Add your own project settings here      
   )
 
