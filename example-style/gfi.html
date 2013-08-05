@@ -1,0 +1,468 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Recipe Index</title>
+<link href="css/reset.css" rel="stylesheet">
+<link href="css/anythingslider.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Trade+Winds|Piedra' rel='stylesheet' type='text/css'>
+<script src="_js/jquery-1.7.2.min.js"></script>
+<script src="js/jquery.anythingslider.js"></script>
+<style>
+
+body {
+	background: #304045 url(img/bg_banner.jpeg) repeat-x; /* rgb(48,64,69) */
+}
+
+header {
+	position: relative;
+}
+
+.main {
+	width: 1200px;
+	background-color: #7AA1DA; /* rgb(122,161,218) */
+	border: 5px solid white;
+	border-bottom: none;
+	margin: 0 auto; 
+	padding: 0 10px;
+}
+
+.main h1 {
+	font-family: 'Trade Winds', cursive;
+	font-size: 100px;
+	color: #ECA970;
+	line-height: 1.2em;
+	text-align: right;
+	padding-right: 50px;
+}
+
+.main h2 {
+	font-family: 'Trade Winds', cursive;
+	font-size: 4em;
+	color: white;
+	display: block;
+	margin-top: -50px;
+	text-align: right;
+	padding-right: 50px;
+}
+
+#login {
+	width: 200px;
+	position: absolute;
+	left: 0;
+	bottom: 2px;
+	z-index: 100;
+	color: white;
+}
+
+#login form {
+	display: none;	
+	background-color: #FDBA81;
+	font-family: "Hoefler Text",Garamond,Times,serif;
+}
+
+#login form label {
+	font-size: 0.9em;
+	display: inline-block;
+	padding: 2px 5px;
+	color: rgb(48,64,69);	
+	background-color: #FDBA81;
+	font-weight: bold;
+}
+
+#login form input[type="text"] {
+	height: 20px;
+	border: none;
+	background-color: rgba(255,255,255,.5);
+	color:  rgba(48,64,69,1);
+	box-shadow: inset 0 0 5px rgba(248,64,69,.75);
+}
+
+#login form input[type="submit"] {
+	color: white;
+	background:  rgb(48,64,69);
+	border: none;
+	margin: 5px 0 5px 110px;
+}
+
+#login form input[type="text"]:focus {
+	background-color: white;
+	color: black
+}
+
+#open {
+	padding-left: 20px;
+	font-weight: bold;
+	background: rgb(110, 138,195) url(img/open.png) no-repeat;
+	cursor: pointer;
+}
+
+#open:hover {
+	color: rgb(0,0,0);
+	background-color: #ECA970;
+}
+
+#login .close {
+	background-image: url(img/close.png);
+	background-color: #ECA970;
+}
+
+#sideWrapper {
+	float: right;
+	max-width: 400px;
+}
+
+h3 {
+	color: #ECA970;
+	font-size: 1.2em;	
+	display: block;
+	border-bottom: 1px solid white;
+	border-top: 1px solid white;
+	line-height: 1.2em;
+}
+
+.panel {
+	font-size: 1.2em;
+	background: #EEF4FA url(img/sub_banner.jpeg) repeat-x;
+	color: rgb(48,64,69);
+	border-radius: 5px;
+	padding: 5px 10px;
+	margin: 10px 5px;
+}
+
+.panel h3 {
+	margin-bottom: 10px;
+}
+
+.panel .recipe {
+	border-bottom: 2px solid #90B2D8;
+	margin-bottom: 5px;
+	padding-top: 5px;
+	min-height: 60px;
+}
+
+.panel .title {
+
+	font-size: .8em;
+	font-weight: bold;
+}
+
+.panel .rating {
+	margin-left: 65px;
+	font-size: .7em;
+	padding-bottom: 10px;
+}
+
+.panel img {
+	max-width: 60px;
+	float: left;
+}
+
+#search {
+	margin: 25px 5px 5px 5px;
+	min-height: 190px;
+}
+
+#search form {
+	margin-top: 10px;
+	font-family: "Hoefler Text",Garamond,Times,serif;
+	line-height: 1.4em;
+}
+
+#search .label {
+	display: inline-block;
+	font-size: 0.9em;
+	padding: 2px 10px;
+	color: rgb(48,64,69);
+	font-weight: bold;
+	width: 120px;
+	text-align: right;
+}
+
+#search label.short {
+	font-size: 0.8em;
+}
+
+#search form input[type="text"], #search form select {
+	height: 20px;
+	border: none;
+	background-color: rgba(255,255,255,.5);
+	color:  rgba(48,64,69,1);
+	box-shadow: inset 0 0 5px rgba(48,64,69,.75);
+	width: 200px;
+	height: 25px;
+}
+
+#search form select.short {
+	width: 50px;
+}
+
+#search form input[type="text"]:focus, #search form select:focus {
+	background-color: white;
+}
+
+#search form  input[type="submit"] {
+	color: white;
+	background:  rgb(48,64,69);
+	border: none;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	float: right;
+}
+
+#listing {
+	font-size: 1.2em;
+	width: 765px;
+}
+
+#mainPanel {
+	background: #EEF4FA url(img/highlight_banner.jpeg) repeat-x;
+	border: none; 
+	margin: 25px 5px;
+	padding: 10px;
+	width: 765px;
+	height: 250px;
+	font-family: "Hoefler Text",Garamond,Times,serif;
+	font-size: 28px;
+	box-shadow: -4px 6px 8px rgba(48,64,69,.75);
+}
+
+#mainPanel img {
+	max-width:150px;
+	float: left;
+}
+
+#mainPanel h3 {
+	line-height: 1.2em;
+	margin-bottom: 15px;
+}
+
+#mainPanel .title {
+	margin-left: 160px;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+#mainPanel .rating {
+	font-size: 0.8em;
+ 	margin-left: 160px;
+}
+
+</style>
+
+<script type="text/javascript">
+
+	$(document).ready(function() {
+	
+		$('#slider').anythingSlider();
+
+		$('#login').click( function() {
+			$('#login form').slideToggle(300);
+	 		$('#open').toggleClass('close'); 
+		});
+
+	});
+
+</script>
+
+</head>
+<body class="main">
+
+
+<header>
+<h1>BBC Good Food</h1>
+<h2>Recipe Index</h2>
+
+<div id="login">
+<p id="open">Login</p>
+<form>
+	<p>
+		<label for="username">Username:</label>
+		<input type="text" name="username" id="username">
+	</p>
+	<p>
+		<label for="password">Password: </label>
+		<input type="text" name="password" id="password">
+	</p>
+	<p>
+		<input type="submit" name="button" id="button" value="Submit" >
+	</p>
+</form>
+</div>
+
+</header>
+
+<div id="sideWrapper">
+	<div id="search" class="panel">
+	<h3>Search Recipes</h3>
+	<form>
+		<p>
+			<!-- <img class="info" src="img/info-icon.png">-->
+			<label for="title" class="label">Recipe Title</label> 
+			<input type="text" name="title" id="title">
+		</p>
+		<p>
+			<label for="category" class="label">Type</label>
+			<select>
+			  <option value="Soup">Soup</option>
+			  <option value="Side">Side</option>
+			  <option value="Meat">Meat</option>
+			  <option value="Vegetarian">Vegetarian</option>
+			</select> 
+		</p>
+		<p>
+			<span class="label">Issue</span>
+			<label for="month" class="short">Month
+				<select class="short">
+					<option value="01">Jan</option>
+					<option value="02">Feb</option>
+					<option value="03">Mar</option>
+					<option value="04">Apr</option>
+					<option value="05">May</option>
+					<option value="06">Jun</option>
+					<option value="07">Jul</option>
+					<option value="08">Aug</option>
+					<option value="09">Sep</option>
+					<option value="10">Oct</option>
+					<option value="11">Nov</option>
+					<option value="12">Dec</option>
+				</select>
+			</label>
+			<label for="year" class="short">Year
+				<select class="short">
+					<option value="2010">2010</option>
+					<option value="2011">2011</option>
+					<option value="2012">2012</option>
+				</select>
+			</label>
+			</label>
+		<p>
+			<span class="label">Order by</span>
+			<label class="short">
+	        	<input type="radio" name="rating" value="Rating" />
+	        	Rating
+	        </label>
+
+	        <label class="short">
+	        	<input type="radio" name="alphabet" value="Alphabet" />     
+	        	Alphabetical
+	        </label> 
+	     </p> 
+	     		
+		<p><input type="submit" name="button" id="button" value="Submit"></p>
+	</form>
+	</div>
+
+<div id="top10" class="panel">
+<h3>Top 5 Recipes</h3>
+	<div class="recipe">
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+		<div class="rating">24 ratings</div>
+	</div>
+	<div class="recipe"> 
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+		<div class="rating">24 ratings</div>
+	</div>
+	<div class="recipe">
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+		<div class="rating">24 ratings</div>
+	</div>
+	<div class="recipe">
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+		<div class="rating">24 ratings</div>
+	</div>
+	<div class="recipe">
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+	</div>
+
+</div>
+
+</div> 
+
+<div id="mainPanel" class="panel">
+	<h3>Recipe of the day</h3>
+<div id="slider" >
+
+	<div>
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+		<div class="rating">24 ratings</div>
+	</div>
+	<div>
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Try this other recipe</div>
+		<div class="rating">1 rating</div>
+	</div>
+	<div>
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Try yet another recipe</div>
+		<div class="rating">3 ratings</div>
+	</div>
+</div>
+</div>
+
+<div id="listing" class="panel">
+	<h3>All recipes</h3>
+	<div class="recipe">
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+		<div class="rating">24 ratings</div>
+	</div>
+
+	<div class="recipe">
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+		<div class="rating">24 ratings</div>
+	</div>
+
+	<div class="recipe">
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+		<div class="rating">24 ratings</div>
+	</div>
+
+	<div class="recipe">
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+		<div class="rating">24 ratings</div>
+	</div>
+
+	<div class="recipe">
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+		<div class="rating">24 ratings</div>
+	</div>
+
+	<div class="recipe">
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+		<div class="rating">24 ratings</div>
+	</div>
+
+	<div class="recipe">
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+		<div class="rating">24 ratings</div>
+	</div>
+
+	<div class="recipe">
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+		<div class="rating">24 ratings</div>
+	</div>
+
+	<div class="recipe">
+		<img src="img/cannellini_bean_salad.jpeg">
+		<div class="title">Cannellini bean salad with roast cherry tomatoes & chorizo</div>
+		<div class="rating">24 ratings</div>
+	</div>
+</div>
+
+<p>fjhkgkjhg kjgjhzf ujzr iztujgh z fjhkgkjhg kjgjhzf ujzr iztujgh zfjhkgkjhg kjgjhzf ujzr iztujgh zfjhkgkjhg kjgjhzf ujzr iztujgh zfjhkgkjhg kjgjhzf ujzr iztujgh zfjhkgkjhg kjgjhzf ujzr iztujgh zfjhkgkjhg kjgjhzf ujzr iztujgh zfjhkgkjhg kjgjhzf ujzr iztujgh z</p>
+</body>
+</html>
